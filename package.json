@@ -1,0 +1,19 @@
+{
+  "author": "Will S. Laurance <w.laurance@gmail.com> (www.wlaurance.com)",
+  "name": "appygram",
+  "description": "appygram module to talk to appygram messaging service",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git@github.com:wlaurance/appygram-node.git"
+  },
+  "main": "lib/appygram.js",
+  "scripts": {
+    "test": "cake test"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
