@@ -10,7 +10,9 @@
   "scripts": {
     "test": "cake test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "singleton":"*"
+  },
   "devDependencies": {
     "colors":"*"
     , "mocha":"1.4.2"
