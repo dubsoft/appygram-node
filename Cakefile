@@ -6,7 +6,7 @@ pipe = (p)->
   p.stderr.on 'data', (d)->
     console.log d.toString()
 task 'dev', 'compile coffee and put into correct dirs', ->
-  s = spawn 'coffee', ['-o', 'lib/',  '-cw', 'coffee/']
+  s = spawn __dirname + '/node_modules/.bin/coffee', ['-o', 'lib/',  '-cw', 'coffee/']
   pipe s
 
 # mocha test
