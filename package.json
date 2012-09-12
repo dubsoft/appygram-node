@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "singleton":"*"
+    , "request":"2.11.1"
   },
   "devDependencies": {
     "colors":"*"
