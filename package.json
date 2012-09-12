@@ -13,6 +13,8 @@
   "dependencies": {},
   "devDependencies": {
     "colors":"*"
+    , "mocha":"1.4.2"
+    , "should":"1.1.0"
   },
   "optionalDependencies": {},
   "engines": {
