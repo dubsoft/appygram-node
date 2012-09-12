@@ -5,7 +5,7 @@ class Appygram extends Singleton
   constructor:()->
     @api_key = undefined
     @format = 'json'
-    @endpoint = 'http://192.168.1.71:3000'
+    @endpoint = 'http://api.appygram.com'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
 
   setApiKey:(@api_key)->
@@ -33,8 +33,6 @@ class Appygram extends Singleton
           "Accept":"application/json"
           "Content-Type":"application/json"
       request options, (error, response, body)->
-        console.log error
-        console.log body
         process.nextTick ->
           next err
 

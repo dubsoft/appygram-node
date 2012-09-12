@@ -11,7 +11,6 @@ describe 'Appygram', ->
     done()
   it 'should set the api_key', (done)->
     api_key = 'cb96a697cec9bb9c1a57db549bb3d1b00129a7af'
-    api_key = '5852e33082179620900a80e34ab2f50eba61d418'
     appygram.setApiKey api_key
     assert.equal appygram.api_key, api_key
     done()
