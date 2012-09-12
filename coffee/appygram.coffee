@@ -6,7 +6,7 @@ class Appygram extends Singleton
     @api_key = undefined
     @format = 'json'
     @endpoint = 'http://api.appygram.com'
-    @version = JSON.parse(fs.readSync __dirname + '../package.json').version
+    @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
 
   errorHandler:(err, req, res, next)->
     if @api_key is undefined
