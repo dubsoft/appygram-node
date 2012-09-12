@@ -11,7 +11,9 @@
     "test": "cake test"
   },
   "dependencies": {},
-  "devDependencies": {},
+  "devDependencies": {
+    "colors":"*"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
