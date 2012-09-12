@@ -9,3 +9,16 @@ describe 'Appygram', ->
   it 'should have the correct version number', (done)->
     assert.equal appygram.version, JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
     done()
+  it 'should set the api_key', (done)->
+    api_key = 'cb96a697cec9bb9c1a57db549bb3d1b00129a7af'
+    api_key = '5852e33082179620900a80e34ab2f50eba61d418'
+    appygram.setApiKey api_key
+    assert.equal appygram.api_key, api_key
+    done()
+  it 'should send an exception and pass the error', (done)->
+    message = "Error: Cannot find module 'blaha'        at Function._resolveFilename (module.js:337:11)            at Function._load (module.js:279:25)                at Module.require (module.js:359:17)                    at require (module.js:375:17)                        at repl:1:2                            at REPLServer.eval (repl.js:80:21)                                at Interface.<anonymous> (repl.js:182:12)                                    at Interface.emit (events.js:67:17)                                        at Interface._onLine (readline.js:162:10)                                            at Interface._line (readline.js:426:8)"
+    appygram.format = 'text'
+    appygram.errorHandler message, {}, {}, (error)->
+      assert.equal error, message
+      done()
+
