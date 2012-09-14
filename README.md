@@ -20,4 +20,4 @@ Status](https://secure.travis-ci.org/wlaurance/appygram-node.png)](http://travis
   appygram.setApiKey('your_api_key');
   app.use(appygram.errorHandler);
 ```
-[Example app]('/wlaurance/appygram-express-test-project')
+[Example app](/wlaurance/appygram-express-test-project)
