@@ -15,6 +15,8 @@ Status](https://secure.travis-ci.org/wlaurance/appygram-node.png)](http://travis
 ```
   var appygram = require('appygram');
   ...
+  //Make sure to use app.router; otherwise this middleware will not work
+  app.use(app.router);
   appygram.setApiKey('your_api_key');
   app.use(appygram.errorHandler);
 ```
