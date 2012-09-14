@@ -1,6 +1,7 @@
 should = require 'should'
 assert = require 'assert'
 appygram = require __dirname + '/../lib/appygram'
+appygram.debug = true
 
 describe 'Appygram', ->
   it 'should default to an undefined api_key', (done)->

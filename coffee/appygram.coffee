@@ -8,36 +8,39 @@ class Appygram extends Singleton
     @endpoint = 'http://api.appygram.com'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
 
-  setApiKey:(@api_key)->
+  setApiKey:(api_key)->
+    @api_key = api_key
 
-  errorHandler:(err, req, res, next)->
-    if @api_key is undefined
-      console.err 'Please define Appygram\'s API_KEY with appygram.api_key = \'your_api_key\' or appygram.setApiKey(\'your_api_key\')
+  errorHandler:(err, res, req, next)->
+    appy = Appygram.get()
+    if appy.api_key is undefined
+      console.error 'Please define Appygram\'s API_KEY with appygram.api_key = \'your_api_key\' or appygram.setApiKey(\'your_api_key\')
         \ If you need an API key please visit http://www.appygram.com/dashboard and request one for your project.'
     else
       params =
-        api_key:@api_key
+        api_key:appy.api_key
         name:"Exception"
         topic:"Exception"
-        message: @formatMessage err
-        platform: "appygram-node#{@version}"
+        message: appy.formatMessage err
+        platform: "appygram-node#{appy.version}"
         software: "node application"
 
       options =
-        uri:@endpoint + '/appygrams'
+        uri:appy.endpoint + '/appygrams'
         method:'POST'
         body: JSON.stringify params
         json:true
         headers:
-          "User-Agent":"appygram-node/#{@version}"
+          "User-Agent":"appygram-node/#{appy.version}"
           "Accept":"application/json"
           "Content-Type":"application/json"
       request options, (error, response, body)->
-        process.nextTick ->
+        console.log 'Processed appygram'
+        if appy.debug
           next err
+      next err if next? and not appy.debug
 
-
-  formatMessage:(error)->
+  formatMessage:(error)=>
     switch @format
       when 'json'
         return JSON.stringify error
@@ -46,4 +49,3 @@ class Appygram extends Singleton
 
 
 module.exports = Appygram.get()
-
