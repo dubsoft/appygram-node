@@ -4,6 +4,7 @@ request = require 'request'
 class Appygram extends Singleton
   constructor:()->
     @api_key = undefined
+    @duplicateLimit = 0
     @format = 'json'
     @endpoint = 'http://api.appygram.com'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
@@ -16,7 +17,7 @@ class Appygram extends Singleton
     if appy.api_key is undefined
       console.error 'Please define Appygram\'s API_KEY with appygram.api_key = \'your_api_key\' or appygram.setApiKey(\'your_api_key\')
         \ If you need an API key please visit http://www.appygram.com/dashboard and request one for your project.'
-    else
+    else if appy.throttleDuplicate err
       params =
         api_key:appy.api_key
         name:"Exception"
@@ -47,5 +48,10 @@ class Appygram extends Singleton
       when 'text'
         return String error
 
+  throttleDuplicate:(error)=>
+    return true if @duplicateLimit is 0
+
+  setDuplicateLimit:(duplicate)=>
+    @duplicateLimit = Number duplicate
 
 module.exports = Appygram.get()
