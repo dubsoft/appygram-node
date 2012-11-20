@@ -3,12 +3,21 @@ request = require 'request'
 
 class Appygram extends Singleton
   constructor:()->
+    @defaults()
+
+  defaults:()->
     @api_key = undefined
     @endpoint = 'https://appygram.appspot.com/traces'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
+    @user_location = 'user'
+    @include_user = false
+    @app_name = "node application"
 
   setApiKey:(api_key)->
     @api_key = api_key
+
+  reset_to_default:()->
+    @defaults()
 
   errorHandler:(err, res, req, next)->
     appy = Appygram.get()
@@ -27,7 +36,9 @@ class Appygram extends Singleton
           message:error.message
           backtrace:error.stack.split '\n'
         platform: "appygram-node#{appy.version}"
-        software: "node application"
+        software: appy.app_name
+        app_json:
+          user: JSON.stringify req[appy.user_location] if appy.include_user and req[appy.user_location]?
 
       options =
         uri:appy.endpoint
