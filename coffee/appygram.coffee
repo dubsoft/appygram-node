@@ -31,7 +31,7 @@ class Appygram extends Singleton
         name:"Exception"
         topic:"Exception"
         message: error.toString()
-        trace:
+        trace: JSON.stringify
           class:error.message
           message:error.message
           backtrace:error.stack.split '\n'
