@@ -46,4 +46,4 @@ appygram.reset_to_default();
 ```
 You can see some basic examples here.
 
-[Example app](/wlaurance/appygram-express-test-project)
+[Example app](https://github.com/wlaurance/appygram-express-test-project)
