@@ -12,11 +12,13 @@ describe 'Appygram', ->
   it 'should have the correct version number', ()->
     assert.equal appygram.version, JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
   it 'should set the api_key', (done)->
-    api_key = 'cb96a697cec9bb9c1a57db549bb3d1b00129a7af'
+    api_key = '5d38e5baf40722fe6b8276c842f20d0da53982bc'
     appygram.setApiKey api_key
     assert.equal appygram.api_key, api_key
     done()
   it 'should send an exception and pass the error', (done)->
+    #Use the dev appspot endpoint
+    appygram.endpoint = 'http://appygram-dev.appspot.com/traces'
     appygram.errorHandler message, {}, {}, (error)->
       done()
   it 'should have the option to set user info on error', ()->
