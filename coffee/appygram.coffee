@@ -34,7 +34,7 @@ class Appygram extends Singleton
         trace: JSON.stringify
           class:error.message
           message:error.message
-          backtrace:error.stack.split '\n'
+          backtrace: appy.parseBackTrace error.stack
         platform: "appygram-node#{appy.version}"
         software: appy.app_name
         app_json:
@@ -54,5 +54,20 @@ class Appygram extends Singleton
         if appy.debug
           next err
       next err if next? and not appy.debug
+
+  parseBackTrace:(trace)->
+    list = trace.split '\n'
+    traces = []
+    for trace in list
+      traceList = []
+      msgs = trace.split '('
+      if msgs.length > 1
+        traceList.push msgs[0]
+        rest = msgs[1].split ':'
+        traceList.push rest[0]
+        traceList.push rest[1]
+      if traceList.length > 0
+        traces.push traceList
+    return traces
 
 module.exports = Appygram.get()
