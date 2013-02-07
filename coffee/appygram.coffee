@@ -7,7 +7,7 @@ class Appygram extends Singleton
 
   defaults:()->
     @api_key = undefined
-    @endpoint = 'https://appygram.appspot.com/traces'
+    @endpoint = 'https://arecibo.appygram.com/traces'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
     @user_location = 'user'
     @include_user = false

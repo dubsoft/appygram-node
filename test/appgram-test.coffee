@@ -8,7 +8,7 @@ describe 'Appygram', ->
   it 'should default to an undefined api_key', ()->
     assert.equal appygram.api_key, undefined
   it 'should use the traces endpoint', ()->
-    assert.equal appygram.endpoint, 'https://appygram.appspot.com/traces'
+    assert.equal appygram.endpoint, 'https://arecibo.appygram.com/traces'
   it 'should have the correct version number', ()->
     assert.equal appygram.version, JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
   it 'should set the api_key', (done)->
