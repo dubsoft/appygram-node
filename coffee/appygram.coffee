@@ -25,7 +25,10 @@ class Appygram extends Singleton
       console.error 'Please define Appygram\'s API_KEY with appygram.api_key = \'your_api_key\' or appygram.setApiKey(\'your_api_key\')
         \ If you need an API key please visit http://www.appygram.com/dashboard and request one for your project.'
     else
-      error = new Error err
+      if not err.stack or not err.message
+        error = new Error err
+      else
+        error = err
       params =
         api_key:appy.api_key
         name:"Exception"
