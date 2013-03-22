@@ -45,10 +45,7 @@ class Appygram extends Singleton
         method:'POST'
         body: JSON.stringify params
         json:true
-        headers:
-          "User-Agent":"appygram-node/#{appy.version}"
-          "Accept":"application/json"
-          "Content-Type":"application/json"
+        headers: appy.getHeaders()
       appy.sendAppygram options, ->
         if appy.debug
           next err
@@ -73,6 +70,29 @@ class Appygram extends Singleton
     request gram, (error, response, body)->
       console.log 'Processed appygram'
       callback()
+
+  getHeaders:()->
+    appy = Appygram.get()
+    return {
+      "User-Agent":"appygram-node/#{appy.version}"
+      "Accept":"application/json"
+      "Content-Type":"application/json"
+    }
+
+  sendFeedback:(feedback, callback)->
+    appy = Appygram.get()
+    feedback.api_key = appy.api_key
+    feedback.name = "Feedback"
+    feedback.topic = "Feedback"
+    feedback.platform = "appygram-node#{appy.version}"
+    feedback.software = appy.app_name
+    appy.sendAppygram
+      uri:appy.endpoint
+      method:'POST'
+      body: JSON.stringify feedback
+      json: true
+      headers:appy.getHeaders()
+      , callback
 
 
 module.exports = Appygram.get()

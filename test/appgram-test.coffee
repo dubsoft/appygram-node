@@ -21,6 +21,13 @@ describe 'Appygram', ->
     appygram.endpoint = 'http://appygram-dev.appspot.com/traces'
     appygram.errorHandler message, {}, {}, (error)->
       done()
+  it 'should send a feedback message', (done)->
+    appygram.sendFeedback
+      first_name:'Will'
+      last_name:'Will'
+      email:'w.laurance@gmail.com'
+      , ()->
+        done()
   it 'should have the option to set user info on error', ()->
     assert.equal appygram.user_location, 'user'
     appygram.user_location = 'current_user'
