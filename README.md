@@ -47,3 +47,18 @@ appygram.reset_to_default();
 You can see some basic examples here.
 
 [Example app](https://github.com/wlaurance/appygram-express-test-project)
+
+###Basic sendFeedback Method
+```javascript
+  var appygram = require('appygram');
+  appygram.setApiKey('api_key');
+  appygram.sendFeedback({
+   first_name:'Will',
+   last_name:'Laurance',
+   email:'w.laurance@gmail.com'
+  }, function(){
+    //done sending feedback
+  });
+```
+Most of the options for the express route are available to this method
+with the exception of the include user option.
