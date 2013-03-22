@@ -2,7 +2,7 @@
   "author": "Will S. Laurance <w.laurance@gmail.com> (www.wlaurance.com)",
   "name": "appygram",
   "description": "appygram module to talk to appygram messaging service",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "repository": {
     "url": "git@github.com:wlaurance/appygram-node.git"
   },
