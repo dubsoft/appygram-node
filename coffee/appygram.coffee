@@ -49,8 +49,7 @@ class Appygram extends Singleton
           "User-Agent":"appygram-node/#{appy.version}"
           "Accept":"application/json"
           "Content-Type":"application/json"
-      request options, (error, response, body)->
-        console.log 'Processed appygram'
+      appy.sendAppygram options, ->
         if appy.debug
           next err
       next err if next? and not appy.debug
@@ -69,5 +68,11 @@ class Appygram extends Singleton
       if traceList.length > 0
         traces.push traceList
     return traces
+
+  sendAppygram:(gram, callback)->
+    request gram, (error, response, body)->
+      console.log 'Processed appygram'
+      callback()
+
 
 module.exports = Appygram.get()
