@@ -7,7 +7,7 @@ class Appygram extends Singleton
 
   defaults:()->
     @api_key = undefined
-    @endpoint = 'https://arecibo.appygram.com/traces'
+    @endpoint = 'https://arecibo.appygram.com'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
     @user_location = 'user'
     @include_user = false
@@ -41,7 +41,7 @@ class Appygram extends Singleton
           user: JSON.stringify req[appy.user_location] if appy.include_user and req[appy.user_location]?
 
       options =
-        uri:appy.endpoint
+        uri:appy.endpoint + '/traces'
         method:'POST'
         body: JSON.stringify params
         json:true
@@ -82,12 +82,10 @@ class Appygram extends Singleton
   sendFeedback:(feedback, callback)->
     appy = Appygram.get()
     feedback.api_key = appy.api_key
-    feedback.name = "Feedback"
-    feedback.topic = "Feedback"
     feedback.platform = "appygram-node#{appy.version}"
     feedback.software = appy.app_name
     appy.sendAppygram
-      uri:appy.endpoint
+      uri:appy.endpoint + '/appygrams'
       method:'POST'
       body: JSON.stringify feedback
       json: true
