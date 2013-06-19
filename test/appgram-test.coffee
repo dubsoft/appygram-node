@@ -8,7 +8,7 @@ describe 'Appygram', ->
   it 'should default to an undefined api_key', ()->
     assert.equal appygram.api_key, undefined
   it 'should use the traces endpoint', ()->
-    assert.equal appygram.endpoint, 'https://arecibo.appygram.com/traces'
+    assert.equal appygram.endpoint, 'https://arecibo.appygram.com'
   it 'should have the correct version number', ()->
     assert.equal appygram.version, JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
   it 'should set the api_key', (done)->
@@ -18,9 +18,16 @@ describe 'Appygram', ->
     done()
   it 'should send an exception and pass the error', (done)->
     #Use the dev appspot endpoint
-    appygram.endpoint = 'http://appygram-dev.appspot.com/traces'
+    appygram.endpoint = 'http://appygram-dev.appspot.com'
     appygram.errorHandler message, {}, {}, (error)->
       done()
+  it 'should send a feedback message', (done)->
+    appygram.sendFeedback
+      name: 'Will Laurance'
+      topic: 'Feedback'
+      email:'w.laurance@gmail.com'
+      , ()->
+        done()
   it 'should have the option to set user info on error', ()->
     assert.equal appygram.user_location, 'user'
     appygram.user_location = 'current_user'

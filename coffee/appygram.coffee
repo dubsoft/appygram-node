@@ -7,7 +7,7 @@ class Appygram extends Singleton
 
   defaults:()->
     @api_key = undefined
-    @endpoint = 'https://arecibo.appygram.com/traces'
+    @endpoint = 'https://arecibo.appygram.com'
     @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
     @user_location = 'user'
     @include_user = false
@@ -44,16 +44,12 @@ class Appygram extends Singleton
           user: JSON.stringify req[appy.user_location] if appy.include_user and req[appy.user_location]?
 
       options =
-        uri:appy.endpoint
+        uri:appy.endpoint + '/traces'
         method:'POST'
         body: JSON.stringify params
         json:true
-        headers:
-          "User-Agent":"appygram-node/#{appy.version}"
-          "Accept":"application/json"
-          "Content-Type":"application/json"
-      request options, (error, response, body)->
-        console.log 'Processed appygram'
+        headers: appy.getHeaders()
+      appy.sendAppygram options, ->
         if appy.debug
           next err
       next err if next? and not appy.debug
@@ -72,5 +68,32 @@ class Appygram extends Singleton
       if traceList.length > 0
         traces.push traceList
     return traces
+
+  sendAppygram:(gram, callback)->
+    request gram, (error, response, body)->
+      console.log 'Processed appygram'
+      callback()
+
+  getHeaders:()->
+    appy = Appygram.get()
+    return {
+      "User-Agent":"appygram-node/#{appy.version}"
+      "Accept":"application/json"
+      "Content-Type":"application/json"
+    }
+
+  sendFeedback:(feedback, callback)->
+    appy = Appygram.get()
+    feedback.api_key = appy.api_key
+    feedback.platform = "appygram-node#{appy.version}"
+    feedback.software = appy.app_name
+    appy.sendAppygram
+      uri:appy.endpoint + '/appygrams'
+      method:'POST'
+      body: JSON.stringify feedback
+      json: true
+      headers:appy.getHeaders()
+      , callback
+
 
 module.exports = Appygram.get()
