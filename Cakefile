@@ -14,7 +14,7 @@ test = (callback, env = process.env) ->
   try
     cmd = __dirname + '/node_modules/.bin/mocha'
     process.env.NODE_PATH = process.cwd() + '/Resources'
-    spec = spawn cmd, ['--compilers','coffee:coffee-script','--colors','--require','should', '-R', 'landing', '--timeout', '10000']
+    spec = spawn cmd, ['--compilers','coffee:coffee-script','--colors','--require','should', '-R', 'landing', '--timeout', '5500']
     pipe spec
     spec.on 'exit', (status) -> callback?() if status is 0
   catch err

@@ -71,8 +71,7 @@ class Appygram extends Singleton
 
   sendAppygram:(gram, callback)->
     request gram, (error, response, body)->
-      console.log 'Processed appygram'
-      callback()
+      callback() if callback and typeof callback is 'function'
 
   getHeaders:()->
     appy = Appygram.get()
