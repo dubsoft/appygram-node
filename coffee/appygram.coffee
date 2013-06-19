@@ -8,7 +8,7 @@ class Appygram extends Singleton
   defaults:()->
     @api_key = undefined
     @endpoint = 'https://arecibo.appygram.com'
-    @version = JSON.parse((require 'fs').readFileSync __dirname + '/../package.json').version
+    @version = require("#{__dirname}/../package").version
     @user_location = 'user'
     @include_user = false
     @app_name = "node application"

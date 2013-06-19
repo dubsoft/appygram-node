@@ -28,6 +28,15 @@ describe 'Appygram', ->
       email:'w.laurance@gmail.com'
       , ()->
         done()
+  it 'should not throw any errors for an empty callback', (done)->
+    try
+      appygram.sendFeedback
+        name: 'Will Laurance'
+        topic: 'Feedback'
+        email: 'w.laurance@gmail.com'
+      setTimeout done, 5000
+    catch e
+      assert.equal yes, no
   it 'should have the option to set user info on error', ()->
     assert.equal appygram.user_location, 'user'
     appygram.user_location = 'current_user'
