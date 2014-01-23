@@ -7,7 +7,7 @@ An Appygram connector
 ##Build Status
 
 [![Build
-Status](https://secure.travis-ci.org/wlaurance/appygram-node.png)](http://travis-ci.org/wlaurance/appygram-node)
+Status](https://secure.travis-ci.org/dubsoft/appygram-node.png)](http://travis-ci.org/dubsoft/appygram-node)
 
 ##Installation
 
